@@ -88,7 +88,7 @@
 # the case when Google notifies the user that they must re-verify their
 # login information by viewing a CAPTCHA image.
 #
-# Version 0.2
+# Version 0.3
 ############################################################################
 
 require 'net/http'
