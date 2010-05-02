@@ -70,10 +70,11 @@
 # NOTES
 # Script Requirements: 
 # The script does not depend on any third-party Ruby code
-# outside of Ruby's Core and Standard Libraries.  It was been testing 
-# successfully on Ruby 1.8.7 (on Debian GNU/Linux).
+# outside of Ruby's Core and Standard Libraries.  It was been tested 
+# successfully on Ruby 1.8.7 (Debian GNU/Linux and FreeBSD).
 #
 # Limitations:
+# Ruby: The script is not compatible with Ruby 1.9.
 # OpenSSL: The script makes no attempt to verify the certificate used to
 # encrypt the transmission between sending login information and google's
 # website.  Ruby's https class can perform this verification,

@@ -130,7 +130,7 @@ p.title b {
             </div>
           </div>
         </div>
-        <p>The script does not depend on any third-party Ruby code outside of Ruby's Core and Standard Libraries. It has been tested successfully on Ruby 1.8.7 (on Debian GNU/Linux). </p>
+        <p>The script does not depend on any third-party Ruby code outside of Ruby's Core and Standard Libraries. It has been tested successfully on Ruby 1.8.7 (on Debian GNU/Linux and FreeBSD). </p>
       </div>
       <div class="sect1" lang="en-US" xml:lang="en-US">
         <div class="titlepage">
@@ -142,6 +142,9 @@ p.title b {
         </div>
         <div class="itemizedlist">
           <ul type="disc">
+            <li>
+              <p><span class="emphasis"><em>Ruby: </em></span>The script is not compatible with Ruby 1.9.</p>
+            </li>
             <li>
               <p><span class="emphasis"><em>OpenSSL: </em></span>The script makes no attempt to verify the certificate used to encrypt the transmission between sending login information and Google's website. Ruby's https class can perform this verification, but the script intentionally disables it - using OpenSSL::SSL::VERIFY_NONE. To perform the verification, the script would need to include the certificate from Googles' CA. This feature can be enabled by following the instructions posted on <a class="ulink" href="http://redcorundum.blogspot.com/2008/03/ssl-certificates-and-nethttps.html" target="_top">this web page</a>.</p>
             </li>
