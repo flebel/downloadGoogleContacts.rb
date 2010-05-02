@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Ruby Script to Download Google Account Contacts</title>
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="start" href="#id2496501" title="Ruby Script to Download Google Account Contacts" />
+    <link rel="next" href="#id2537471" title="1. Overview" />
+    <style type="text/css">
+.command {
+   display: block;
+	font-family: monospace;
+	border: thin black solid;
+	padding: 1em;
+	background-color: #E0E0E0;
+}
+code.literal,.filename,.email {
+    font-family: monospace;
+    display: inline;
+    border: none;
+    padding: 0;
+}
+pre.screen {
+    font-family: monospace;
+    padding: .5em;
+}
+p.title {
+    display: inline;
+    font-size: small;
+}
+p.title b {
+    font-style: normal;
+}
+.figure-contents {
+    border: thin black dotted;
+    background-color: #E6E6E6;
+}
+</style>
+  </head>
+  <body>
+    <div class="article" lang="en-US" xml:lang="en-US">
+      <div class="titlepage">
+        <div><div><h2 class="title"><a id="id2496501"></a>Ruby Script to Download Google Account Contacts</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Chad</span> <span class="surname">Albers</span></h3></div></div>August 18, 2008 </div>
+        <hr />
+      </div>
+      <div class="sect1" lang="en-US" xml:lang="en-US">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="id2537471"></a>1. Overview</h2>
+            </div>
+          </div>
+        </div>
+        <p><code class="filename">downloadGoogleContacts.rb</code> is a fairly robust <a class="ulink" href="http://www.ruby-lang.org/" target="_top">Ruby</a> script that uses Google's <a class="ulink" href="http://code.google.com/apis/contacts/" target="_top">Contacts Data API</a> to download your Contacts from either a Gmail account or a "hosted" Google account. I wrote the script to download and backup all my Contacts on a regular basis using cron. The script uses Google's <a class="ulink" href="http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html" target="_top">ClientLogin interface</a> to access the account. It then downloads the contacts as an Atom XML feed. </p>
+        <p>The script "works for me” and should be considered an early <span class="emphasis"><em>beta</em></span> version. </p>
+      </div>
+      <div class="sect1" lang="en-US" xml:lang="en-US">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="id2545948"></a>2. Script Options and Parameters</h2>
+            </div>
+          </div>
+        </div>
+        <p>The script requires three <span class="emphasis"><em>mandatory</em></span> options:</p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <p>-e or --email EMAIL_ADDRESS </p>
+              <p>The e-mail address of the Google account, including both the username and either Google's domain (@gmail.com), or the hosted account's domain (@neomantic.com).</p>
+            </li>
+            <li>
+              <p>-p or --password PASSWORD </p>
+              <p>The password of the Google account or hosted Google account.</p>
+            </li>
+            <li>
+              <p>-t or --tokenfile FULL_PATH_TO_FILE </p>
+              <p>The file name and path to the file where the script has or will save the ClientLogin token.</p>
+            </li>
+            <li>
+              <p>-o or --output FULL_PATH_TO_FILE</p>
+              <p>The file name and path to the file where the script has or will save the Atom Feed of the Contacts.</p>
+            </li>
+          </ul>
+        </div>
+        <p>The script accepts one <span class="emphasis"><em>optional</em></span> option that modifies the output:</p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <p>-m --maximum MAXIMUM_NUMBER_OF_CONTACTS </p>
+              <p>The maximum number of contacts to retrieve. (Without supplying this parameter, the number of Contacts returned is relatively small.)</p>
+            </li>
+          </ul>
+        </div>
+        <p>The script also accepts two more optional options:</p>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <p>-v or --verbose </p>
+              <p>Provides messages on the script's progress.</p>
+            </li>
+            <li>
+              <p>-h or --help </p>
+              <p>Provides a message describing these options.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect1" lang="en-US" xml:lang="en-US">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="id2497102"></a>3. Usage Example</h2>
+            </div>
+          </div>
+        </div>
+        <p>To download all your Contacts to a file called “<code class="filename">contacts.xml</code>” using a key stored in a file called “<code class="filename">token_file</code>,” run the following command:</p>
+        <p>
+          <span class="command">
+            <strong>$&gt; ruby downloadGoogleContacts.rb -e myGoogleAccount@address.com -p sekritpassword -m 10000 -t /home/my_home/token_file -o /home/my_home/contacts.xml</strong>
+          </span>
+        </p>
+      </div>
+      <div class="sect1" lang="en-US" xml:lang="en-US">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="id2497132"></a>4. Script Requirements</h2>
+            </div>
+          </div>
+        </div>
+        <p>The script does not depend on any third-party Ruby code outside of Ruby's Core and Standard Libraries. It has been tested successfully on Ruby 1.8.7 (on Debian GNU/Linux). </p>
+      </div>
+      <div class="sect1" lang="en-US" xml:lang="en-US">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="id2497143"></a>5. Limitations</h2>
+            </div>
+          </div>
+        </div>
+        <div class="itemizedlist">
+          <ul type="disc">
+            <li>
+              <p><span class="emphasis"><em>OpenSSL: </em></span>The script makes no attempt to verify the certificate used to encrypt the transmission between sending login information and Google's website. Ruby's https class can perform this verification, but the script intentionally disables it - using OpenSSL::SSL::VERIFY_NONE. To perform the verification, the script would need to include the certificate from Googles' CA. This feature can be enabled by following the instructions posted on <a class="ulink" href="http://redcorundum.blogspot.com/2008/03/ssl-certificates-and-nethttps.html" target="_top">this web page</a>.</p>
+            </li>
+            <li>
+              <p><span class="emphasis"><em>CAPTCHA: </em></span>The script can handle a number of user, system, and network errors. It can also handle errors noticed by Google. However, it cannot handle the case when Google notifies the user that they must re-verify their login information by viewing a CAPTCHA image. </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect1" lang="en-US" xml:lang="en-US">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="id2497321"></a>6. License</h2>
+            </div>
+          </div>
+        </div>
+        <p>The source code is released under the <a class="ulink" href="http://www.gnu.org/licenses/old-licenses/gpl-2.0.html" target="_top">GNU General Public License Version 2</a> (GPL). The full text of this license can be found in a file called “<code class="filename">gpl-2.0</code>” released with the source code.</p>
+        <p>This documentation is released under the <a class="ulink" href="http://www.gnu.org/licenses/fdl.html" target="_top">GNU Free Documentation License Version 1.2</a>. </p>
+        <p>Copyright (c) Chad Albers. Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.2 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled "GNU Free Documentation License". </p>
+        <p>The full text of this license is found in the file called “<code class="filename">fdl.txt</code>” released with the source code.</p>
+      </div>
+      <div class="sect1" lang="en-US" xml:lang="en-US">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="id2497176"></a>7. Download Location</h2>
+            </div>
+          </div>
+        </div>
+        <p>The source code and documentation can be downloaded from <a class="ulink" href="http://www.neomantic.com/downloads/downloadGoogleContacts-0.2.tgz" target="_top">here</a>. The GPG signature of this file can be found <a class="ulink" href="http://www.neomantic.com/downloads/downloadGoogleContacts-0.2.tgz.sign" target="_top">here</a>. Updates to the script will be posted to <a class="ulink" href="http://www.neomantic.com" target="_top">http://www.neomantic.com</a></p>
+      </div>
+      <div class="sect1" lang="en-US" xml:lang="en-US">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="id2497204"></a>8. Contact</h2>
+            </div>
+          </div>
+        </div>
+        <p>Please direct questions or requests for more information to <code class="email">&lt;<a class="email" href="mailto:chad@neomantic.com">chad@neomantic.com</a>&gt;</code>. Corrections, suggestions, bug reports, and patches are welcome as well.</p>
+      </div>
+    </div>
+  </body>
+</html>

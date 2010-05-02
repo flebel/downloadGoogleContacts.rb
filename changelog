@@ -1,0 +1,4 @@
+Aug 18, 2008
+* Script ignore setting max results - this has been fixed
+* Script now handles when the user has failed to supply an
+  output file
