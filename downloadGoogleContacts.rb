@@ -292,7 +292,7 @@ end
 # NOTE - this does not handle redirecting users to the CAPTCHA url
 def handleGoogleError( errorString )
   #Error Codes are from http://code.google.com/apis/accounts/docs/AuthForInstalledApps.html
-  case googleError
+  case errorString
     when 'BadAuthentication'
       $stderr.puts "Google: The login request used a username or password \n that is not recognized."
     when 'NotVerified' 
